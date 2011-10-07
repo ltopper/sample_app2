@@ -15,8 +15,8 @@
 	includes the blueprint/screen.css for screens, and the other for printing
 	Rails looks in the public/stylesheets folder by default, so only need 
 	the continuation to 'blueprint/screen' call -->
-	<%= stylesheet_link_tag '/public/stylesheets/blueprint/screen.css', :media => 'screen' %>
-	<%= stylesheet_link_tag '/public/stylesheets/blueprint/print.css',  :media => 'print' %>
+	<%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
+	<%= stylesheet_link_tag 'blueprint/print',  :media => 'print' %>
   </head>
   <body>
 	<!-- will yield to the content of the given page -->
