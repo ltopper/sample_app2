@@ -4,22 +4,24 @@
 	<!-- call the title method defined in application_helper which inserts 
 	the title -->
     <title><%= title %></title>
-    
 	<!-- RAILS SECURITY FEATURE cross-site request forgery (CSRF) -->
 	<%= csrf_meta_tag %>
-	
-	<!-- [if lt IE 9]
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	[endif] -->
-	<!-- Rails helper stylesheet_link_tag (read about in API)
-	includes the blueprint/screen.css for screens, and the other for printing
-	Rails looks in the public/stylesheets folder by default, so only need 
-	the continuation to 'blueprint/screen' call -->
-	<%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
-	<%= stylesheet_link_tag 'blueprint/print',  :media => 'print' %>
+	<%= render 'layouts/stylesheets' %>
   </head>
   <body>
+	<div class="container">
+		<!-- render the header partial -->
+		<%= render 'layouts/header' %>
+		
+		<!-- body -->
+		<section class="round">
+			<%= yield %> 
+		</section>
+		
+		<!-- render the footer partial -->
+		<%= render 'layouts/footer' %>
+	</div>							
 	<!-- will yield to the content of the given page -->
-    <%= yield %>  
+    
   </body>
 </html>
