@@ -1,0 +1,17 @@
+<!-- Creating a PARTIAL as a helper -->
+
+<!-- some stuff for IE - internet explorer compatibility -->
+<!--[if lt IE 9]>
+<script src ="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Rails helper stylesheet_link_tag (read about in API)
+includes the blueprint/screen.css for screens, and the other for printing
+Rails looks in the public/stylesheets folder by default, so only need 
+the continuation to 'blueprint/screen' call -->
+<%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
+<%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
+<!-- [if lt IE8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
+<%= stylesheet_link_tag 'custom', :media => 'screen' %>
+
+

@@ -1,0 +1,22 @@
+<!-- Creating a PARTIAL header as a helper -->
+
+<header>
+	<!-- was this definition for the logo -->
+	<!-- <percent= image_tag("logo.png", :alt => "Sample App", :class => "round") percent> -->
+	<!--  Changed it to this -->
+	<!-- Notice it's not <percent= because we don't want it inserted into the template -->
+	<!-- defines the logo, which logo it is found in 'images' -->	
+	<!-- <percent logo = image_tag("logo.png", :alt => "Sample App", :class => "round") percent> -->
+	
+	<!--    NOW MOVED THE ABOVE DEFINITION TO THE APPLICATION HELPER    -->
+	
+	<!-- link the logo to root_path -->
+	<%= link_to logo, root_path %>
+	<nav class="round">
+		<ul>
+			<li><%= link_to "Home", root_path %></li>
+			<li><%= link_to "Help", help_path %></li>
+			<li><%= link_to "Sign in", '#' %></li>
+		</ul>
+	</nav>
+</header>
