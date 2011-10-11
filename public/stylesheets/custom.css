@@ -146,3 +146,30 @@ footer nav {
   float: none;
 }
 
+/* --------- User show page --------- */
+
+/* profile class: table style */
+table.profile {
+	width: 100%;
+	margin-bottom: 0;
+}
+
+/* main class: datatable style */
+td.main{
+	width: 70%;
+	padding 1em;
+}
+
+/* sidebar class: datatable style */
+td.sidebar {
+	width: 30%;
+	padding: 1em;
+	vertical-align: top;
+	background: #ffc;
+}
+
+/* profile class: gravatar class image style */
+.profile img.gravatar {
+	border: 1px solid #999;
+	margin-bottom: -15px;
+}

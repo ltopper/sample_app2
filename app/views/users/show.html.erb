@@ -1,1 +1,24 @@
-<%= @user.name %>, <%= @user.email %>
+<table class="profile" summary="Profile Information">
+  <!-- table row -->
+  <tr> 
+	
+	<!-- table data cell 1 -->
+	<td class="main">
+	  <h1>
+	    <%= gravatar_for @user %>
+	    <%= @user.name %>
+	  </h1>
+	</td>
+	
+	<!-- table data cell 2 -->
+	<td class="sidebar round">
+	  <!-- <br /> puts a break between the user's name and URL -->
+	  <strong>Name</strong> <%= @user.name %> <br /> 
+	  <!-- user_path(@user) returns /users/1 -->
+		<!-- the following line, produces HTML: <a href="/users/1">/users/1</a> -->
+	  <strong>URL</strong>  <%= link_to user_path(@user), @user %>
+	</td>
+  </tr>
+</table>		
+		
+
