@@ -1,6 +1,10 @@
 SampleApp2::Application.routes.draw do
   # adds a /users/1 URL
   resources :users
+  # Add the resources for the Sessions controller
+  # pertains to user log-in sessions - new session - create it - then destroy it
+  resources :sessions, :only => [:new, :create, :destroy]
+
 
 # User paths now available due to 'resources :users' defined by the users model  
   # users_path :            /users
@@ -19,6 +23,9 @@ SampleApp2::Application.routes.draw do
   # create the match definition for the users controller
   match '/signup', :to => 'users#new'
   
+  # Add the routes for the Sessions Controller
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
   
   # match automatically creates named routes for use in the controllers and views:
       #   about_path => '/about'

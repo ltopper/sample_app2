@@ -51,7 +51,8 @@ class User < ActiveRecord::Base
       # submitted_password
       encrypted_password == encrypt(submitted_password)
   end
-
+# THE NEXT TWO FUNCTIONS HAVE COMMENTED OUT FUNCTIONS THAT ALSO WORK,
+# THEY ARE THERE FOR CLARITY SAKE
   # def self.authenticate(email, submitted_password)
   #   user = find_by_email(email)
   #   return nil if user.nil?
@@ -61,6 +62,19 @@ class User < ActiveRecord::Base
   def self.authenticate(email, submitted_password)
       user = find_by_email(email)
       user && user.has_password?(submitted_password) ? user : nil
+  end
+  
+  # def self.authenticate_with_salt(id, cookie_salt)
+  #   user = find_by_id(id)
+  #   return nil  if user.nil?
+  #   return user if user.salt == cookie_salt
+  # end
+  
+  def self.authenticate_with_salt(id, cookie_salt)
+    user = find_by_id(id)
+    # boolean? ? do_one_thing : do_something_else
+    # Here we test if user.salt == cookie_salt, and return either true (user) or false (nil)
+    (user && user.salt == cookie_salt) ? user : nil
   end
 
   

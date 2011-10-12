@@ -29,8 +29,13 @@ Spork.prefork do
     # examples within a transaction, remove the following line or assign false
     # instead of true.
     config.use_transactional_fixtures = true
+    
+    # Crate a test_sign_in function to be used in Rspec testing
+    def test_sign_in(user)
+      #direct call to the contoller function sign_in
+      controller.sign_in(user)
+    end
   end
-
 end
 
 Spork.each_run do

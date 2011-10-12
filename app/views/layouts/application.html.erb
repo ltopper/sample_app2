@@ -15,6 +15,7 @@
 		
 		<!-- body -->
 		<section class="round">
+			<!-- flash error messages when they are passed to the flash function -->
 			<% flash.each do |key,value| %>
 			  <%= content_tag(:div, value, :class => "flash #{key}") %>
 			<% end %>
