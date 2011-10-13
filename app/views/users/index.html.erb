@@ -1,0 +1,13 @@
+<h1>All users</h1>
+
+<!-- paginates the users onto multiple pages above the body -->
+<%= will_paginate %>
+
+<u1 class="users">
+	<!-- render the partial _user.html.erb: when called with a collection of users,
+		  Rails automatically iterates through them and renders each with _user.html.erb -->
+	<%= render @users %>
+</u1>
+
+<!-- Also puts paginate buttons below -->
+<%= will_paginate %>

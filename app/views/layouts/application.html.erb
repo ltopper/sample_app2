@@ -7,6 +7,9 @@
 	<!-- RAILS SECURITY FEATURE cross-site request forgery (CSRF) -->
 	<%= csrf_meta_tag %>
 	<%= render 'layouts/stylesheets' %>
+	<!-- Have to include JavaScript libraries, because web browsers can't
+	  		send the Delete request issued in _user.html.erb natively-->
+	<%= javascript_include_tag :defaults %>
   </head>
   <body>
 	<div class="container">

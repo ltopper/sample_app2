@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+  # Sets a filter to call the :authenticate method, before allowing either :edit, or :update
+  before_filter :authenticate, :only => [:index, :edit, :update, :destroy]
+  
+  # Sets a filter to only allow the correct user, to edit their own profile
+  before_filter :correct_user, :only => [:edit, :update]
+  
+  # Sets a filter that a user must be an admin to destroy an account
+  before_filter :admin_user,   :only => :destroy
   
   def show
     # This pulls out the id from the URL - which is common in rails
@@ -7,12 +15,22 @@ class UsersController < ApplicationController
     @title = @user.name
   end
   
+# Definition of the index page that shows all users
+  def index
+    @title = "All users"
+    # paginate the users and turn the huge User.all array into 
+    # => many objects to be displayed by default 30 at a time.
+    @users = User.paginate(:page => params[:page])
+
+  end
+    
   def new
     @title = "Sign up"
     # have to define @user for the 'new' controller action to 
     # be used in new.html.erb
     @user = User.new
   end
+
   
 # create, Method: create a new user - else return failure  
   def create
@@ -36,7 +54,50 @@ class UsersController < ApplicationController
       @title = "Sign up"
       # Render the 'new.html.erb', the new user sign up page
       render 'new'
-      
     end
   end
+  
+# Destroy user function
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User destroyed."
+    redirect_to users_path
+  end
+  
+  
+# Edit profile functionality
+  def edit
+    @title = "Edit user"
+  end
+
+# Update profile   
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      flash[:success] = "Profile updated."
+      redirect_to @user # Rails/ruby idiom, will sent to /user/idnumber
+    else
+      @title = "Edit user"
+      render 'edit'
+    end
+  end
+    
+  
+  private
+  
+    def authenticate
+      deny_access unless signed_in?
+    end
+    
+    def correct_user
+      @user = User.find(params[:id])
+      # if the current user is the correct user, then continue on editing, otherwise, send to root_path
+      redirect_to(root_path) unless current_user?(@user)
+    end
+    
+    def admin_user
+      redirect_to(root_path) unless current_user.admin?
+    end
+    
+    
 end

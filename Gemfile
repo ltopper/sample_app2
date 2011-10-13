@@ -7,9 +7,13 @@ gem 'rails', '3.0.9'
 
 gem 'sqlite3', '1.3.3'
 
+
 # HTML image tag recognizer gem
 # Gravatars are a convenient way to deal with user profile images
 gem 'gravatar_image_tag', '1.0.0.pre2'
+
+# Pagination gem - to parse index of users out onto multiple pages
+gem 'will_paginate', '3.0.pre2'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -30,6 +34,7 @@ gem 'gravatar_image_tag', '1.0.0.pre2'
 group :development do
   gem 'rspec-rails', '2.6.1'
   gem 'annotate', '2.4.0'
+  gem 'faker', '0.3.1'
 end
 
 # Bundle gems for the local environment. Make sure to

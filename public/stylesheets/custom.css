@@ -227,3 +227,13 @@ div.field, div.actions {
 	font-size: 12px;
 	list-style: square;
 }
+
+
+/* --------- For Index Page --------- */
+u1.users {
+	margin-top: 1em;
+}
+
+.users li {
+	list-style: none;
+}

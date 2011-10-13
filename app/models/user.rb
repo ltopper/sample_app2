@@ -16,6 +16,9 @@
 #
 require 'digest'
 class User < ActiveRecord::Base
+  # Don't want :admin to be something that can be assigned, so we leave it off accessible,
+  #   and accessor lists
+  
   # Enable the writing of an encrypted password
   attr_accessor :password
   

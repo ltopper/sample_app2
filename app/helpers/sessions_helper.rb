@@ -25,8 +25,28 @@ module SessionsHelper
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
   
+  def current_user?(user)
+    user == current_user
+  end
+  
+  def deny_access
+    # Store the locatoin every time access is denied, so that it can be recovered
+    store_location
+    redirect_to signin_path, :notice => "Please sign in to access this page."
+    # equiv to:
+          # flash[:notice] = "Please sign in to access this page."
+          # redirect_to signin_path
+  end
+  
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    clear_return_to
+  end
+  
+  
   private
   # Don't need these with the adjustment from cookies to sessions
+  #  http://www.nimweb.it/web-development/ruby-on-rails-web-development/ruby-on-rails-tutorial-exercise-9-6-2-rails-session/
     # def user_from_remember_token
     #   # The * operator allows the passage of a two-element array as an argument
     #   # =>  to a method expecting two variables
@@ -51,4 +71,13 @@ module SessionsHelper
       session[:user_id] = nil
       self.current_user = nil
     end
+    
+    def store_location
+      session[:return_to] = request.fullpath
+    end
+    
+    def clear_return_to
+      session[:return_to] = nil
+    end
+
 end

@@ -1,14 +1,10 @@
-<h1>Sign up</h1>
+<h1>Edit user</h1>
 
-<!-- This is a rails stock command that allows you to build a form *form_for* -->
 <%= form_for(@user) do |f| %>
-  <!-- Render error messages that automatically are outputted in the rails console, 
-   'shared/error_messages is a partial -->
+  <!-- create an object in the partial, with which to generate error messages  -->
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
-	<!-- in html: label for user_name, it is 'Name' -->
 	<%= f.label :name %><br />
-	<!-- in html: input user_name, type = text - not obscured -->
 	<%= f.text_field :name %>
   </div>
   <div class="field">
@@ -17,7 +13,6 @@
   </div>
   <div class="field">
 	<%= f.label :password %><br />
-	<!-- in html: input user_password, type = password - obscured (only dots) for security -->
 	<%= f.password_field :password %>
   </div>
   <div class="field">
@@ -25,8 +20,11 @@
 	<%= f.password_field :password_confirmation %>
   </div>
   <div class="actions">
-	<!-- This is the sign-up button text  -->
-	<%= f.submit "Sign up" %>
+	<%= f.submit "Update" %>
   </div>
 <% end %>
 
+<div>
+  <%= gravatar_for @user %>
+  <a href="http://gravatar.com/emails">change</a>
+</div>
