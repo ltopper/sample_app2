@@ -8,12 +8,18 @@ class UsersController < ApplicationController
   # Sets a filter that a user must be an admin to destroy an account
   before_filter :admin_user,   :only => :destroy
   
+  
+# _________________ METHODS
+
+# Show user method  
   def show
     # This pulls out the id from the URL - which is common in rails
     @user = User.find(params[:id])
     # Set the tile of each user to be their username
     @title = @user.name
+    @microposts= @user.microposts.paginate(:page => params[:page])
   end
+  
   
 # Definition of the index page that shows all users
   def index
@@ -21,10 +27,11 @@ class UsersController < ApplicationController
     # paginate the users and turn the huge User.all array into 
     # => many objects to be displayed by default 30 at a time.
     @users = User.paginate(:page => params[:page])
-
   end
     
   def new
+    # Can only create a new user if the current_user is not signed in
+    redirect_to(root_path) unless current_user.nil?
     @title = "Sign up"
     # have to define @user for the 'new' controller action to 
     # be used in new.html.erb
@@ -34,6 +41,9 @@ class UsersController < ApplicationController
   
 # create, Method: create a new user - else return failure  
   def create
+    # Can only create a new user if the current_user is not signed in
+    redirect_to(root_path) unless current_user.nil?
+    
     # @user = User.new(:name => "Foo Bar", :email => "foo@invalid",
     #                  :password => "dude", :password_confirmation => "dude")....or whatever the entries are
     @user = User.new(params[:user])
@@ -57,11 +67,20 @@ class UsersController < ApplicationController
     end
   end
   
+  
 # Destroy user function
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User destroyed."
-    redirect_to users_path
+    # user_to_destroy = User.find(params[:id])
+    # # redirect_to(users_path) unless !@user_to_destroy.admin?
+    # unless current_user?(user_to_destroy)
+    #   user_to_destroy.destroy
+    #   flash[:success] = "User destroyed."
+    # end
+    # redirect_to users_path
+    
+     User.find(params[:id]).destroy
+     flash[:success] = "User destroyed."
+     redirect_to users_path
   end
   
   
@@ -85,18 +104,11 @@ class UsersController < ApplicationController
   
   private
   
-    def authenticate
-      deny_access unless signed_in?
-    end
     
     def correct_user
       @user = User.find(params[:id])
       # if the current user is the correct user, then continue on editing, otherwise, send to root_path
       redirect_to(root_path) unless current_user?(@user)
-    end
-    
-    def admin_user
-      redirect_to(root_path) unless current_user.admin?
     end
     
     

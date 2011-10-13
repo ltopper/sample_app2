@@ -1,0 +1,11 @@
+<!-- need an @micropost instance variable - this is a partial for the Home page
+thus need to add it to the pages controller -->
+<%= form_for @micropost do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>

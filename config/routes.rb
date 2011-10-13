@@ -4,7 +4,9 @@ SampleApp2::Application.routes.draw do
   # Add the resources for the Sessions controller
   # pertains to user log-in sessions - new session - create it - then destroy it
   resources :sessions, :only => [:new, :create, :destroy]
-
+  
+  # Resources for the microposts
+  resources :microposts, :only => [:create, :destroy]
 
 # User paths now available due to 'resources :users' defined by the users model  
   # users_path :            /users

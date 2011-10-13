@@ -43,6 +43,16 @@ module SessionsHelper
     clear_return_to
   end
   
+  # Moved definitions authenticate and admin_user to session helper, 
+  #   from the users_controller - needed by microposts model
+  #   Now we can create filters in the Microposts Controller  
+  def authenticate
+    deny_access unless signed_in?
+  end
+  
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
+  end
   
   private
   # Don't need these with the adjustment from cookies to sessions

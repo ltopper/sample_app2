@@ -1,0 +1,25 @@
+<!-- Partial to assist with forms that pertain to entry of user names, emails, passwords etc... -->
+
+
+<!-- Render error messages that automatically are outputted in the rails console, 
+ 'shared/error_messages is a partial -->
+<%= render 'shared/error_messages', :object => f.object %>
+<div class="field">
+	<!-- in html: label for user_name, it is 'Name' -->
+	<%= f.label :name %><br />
+	<!-- in html: input user_name, type = text - not obscured -->
+	<%= f.text_field :name %>
+</div>
+<div class="field">
+	<%= f.label :email %><br />
+	<%= f.text_field :email %>
+</div>
+<div class="field">
+	<%= f.label :password %><br />
+	<!-- in html: input user_password, type = password - obscured (only dots) for security -->
+	<%= f.password_field :password %>
+</div>
+<div class="field">
+	<%= f.label :password_confirmation, "Confirmation" %><br />
+	<%= f.password_field :password_confirmation %>
+</div>

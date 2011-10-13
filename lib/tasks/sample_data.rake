@@ -13,6 +13,7 @@ namespace :db do
     # make the first user an admin             
     admin.toggle!(:admin)
     
+    # Create 99 users
     99.times do |n|
       name = Faker::Name.name
       email = "example-#{n+1}@railstutorial.org"
@@ -22,6 +23,14 @@ namespace :db do
                    :password => password,
                    :password_confirmation => password)
     end
+  
+  # use the faker gem to generate 50 posts for each of the six first users
+        50.times do
+          User.all(:limit => 6).each do |user|
+              user.microposts.create!(:content => Faker::Lorem.sentence(5))
+          end
+        end
+  
   end
 end                 
                  

@@ -8,6 +8,15 @@
 	    <%= gravatar_for @user %>
 	    <%= @user.name %>
 	  </h1>
+      <% unless @user.microposts.empty? %>
+		<table class="microposts" summary="User microposts">
+		  <%= render @microposts%>
+		</table>
+		<!-- will_paginate assumes an instance variable related to the given model,
+		here we input @microposts instead of the assumed @user -->
+		<%= will_paginate @microposts %>
+	  <% end %>	
+	
 	</td>
 	
 	<!-- table data cell 2 -->
@@ -17,6 +26,7 @@
 	  <!-- user_path(@user) returns /users/1 -->
 		<!-- the following line, produces HTML: <a href="/users/1">/users/1</a> -->
 	  <strong>URL</strong>  <%= link_to user_path(@user), @user %>
+	  <strong>Microposts</strong> <%= @user.microposts.count %>
 	</td>
   </tr>
 </table>		

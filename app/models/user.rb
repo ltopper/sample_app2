@@ -25,6 +25,13 @@ class User < ActiveRecord::Base
   # Define which entities may be modified by users
   attr_accessible :name, :email, :password, :password_confirmation
   
+  # Define has_many relationship: users have many microposts
+  #     The belongs_to has_many pair create a number of usable methods
+  #     :dependent => :destroy, makes it so if a user is destroyed, so are their microposts
+  has_many :microposts, :dependent => :destroy
+  
+  
+  
   # Define email_regex which parses for acceptible email addresses
         # regex - regular expression see rubular.com
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -80,6 +87,14 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
   end
 
+# Method definition for a micropost feed
+  def feed
+    # This is preliminary. See Chapter 12 for the full implementation
+    #     The ? properly escapes 'id' before including it in the underlying SQL query
+    #     Good habit for security holes
+    Micropost.where("user_id = ?", id)
+    # same thing as 'microposts'...because they're already associated to a user
+  end
   
   private # There is no 'end' after private - lesson learned
 
