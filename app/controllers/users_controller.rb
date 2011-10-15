@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   # Sets a filter to call the :authenticate method, before allowing either :edit, or :update
-  before_filter :authenticate, :only => [:index, :edit, :update, :destroy]
+  before_filter :authenticate, :except => [:show, :new, :create]
   
   # Sets a filter to only allow the correct user, to edit their own profile
   before_filter :correct_user, :only => [:edit, :update]
@@ -100,7 +100,21 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-    
+  
+# Following and followers
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.following.paginate(:page => params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(:page => params[:page])
+    render 'show_follow'
+  end
   
   private
   

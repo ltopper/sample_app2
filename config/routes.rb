@@ -1,12 +1,21 @@
 SampleApp2::Application.routes.draw do
   # adds a /users/1 URL
-  resources :users
+  resources :users do
+    # member method means that routes respond to URL's containing user id
+    member do
+      # users/1/following, and users/1/followers
+      get :following, :followers
+    end
+  end
   # Add the resources for the Sessions controller
   # pertains to user log-in sessions - new session - create it - then destroy it
   resources :sessions, :only => [:new, :create, :destroy]
   
   # Resources for the microposts
   resources :microposts, :only => [:create, :destroy]
+  
+  # Resources for relationshiops
+  resources :relationships, :only => [:create, :destroy]
 
 # User paths now available due to 'resources :users' defined by the users model  
   # users_path :            /users
