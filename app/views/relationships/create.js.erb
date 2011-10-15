@@ -1,0 +1,3 @@
+// have to escape out the result when inserting html
+$("follow_form").update("<%= escape_javascript(render('users/unfollow')) %>")
+$("followers").update('<%= "#{@user.followers.count} followers" %>')

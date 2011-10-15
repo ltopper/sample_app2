@@ -17,21 +17,40 @@ describe PagesController do
     
 
   describe "GET 'home'" do
-    it "should be successful" do
-      get 'home'
-      response.should be_success
-    end
-    
-    # Test for titles
-    # checks to see that the content inside the <title></title> tags is "Ruby on Rails Tutorial Sample App | Home"
-    # can be a substring as well to return true, i.e. only :content => "| Home"
-    it "should have the right title" do
-      get 'home'
-      response.should have_selector("title",
-                      :content => 
-                          @base_title + " | Home")
-    end
-  end
+
+     describe "when not signed in" do
+
+       before(:each) do
+         get :home
+       end
+
+       it "should be successful" do
+         response.should be_success
+       end
+
+       it "should have the right title" do
+         response.should have_selector("title",
+                                       :content => "#{@base_title} | Home")
+       end
+     end
+
+     describe "when signed in" do
+ 
+       before(:each) do
+         @user = test_sign_in(Factory(:user))
+         other_user = Factory(:user, :email => Factory.next(:email))
+         other_user.follow!(@user)
+       end
+
+       it "should have the right follower/following counts" do
+         get :home
+         response.should have_selector("a", :href => following_user_path(@user),
+                                            :content => "0 following")
+         response.should have_selector("a", :href => followers_user_path(@user),
+                                            :content => "1 follower")
+       end
+     end
+   end
 
   describe "GET 'contact'" do # just a description
     it "should be successful" do # so you can read english
@@ -45,7 +64,6 @@ describe PagesController do
                       :content => 
                           @base_title + " | Contact")
     end
-    
   end
 
   # Test for the 'about page' which we have not yet created 
@@ -78,5 +96,5 @@ describe PagesController do
     end
   end
   
-  
 end
+  
