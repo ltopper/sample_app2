@@ -19,11 +19,6 @@ class Micropost < ActiveRecord::Base
   # Return microposts from the users being followed by the given user.
   scope :from_users_followed_by, lambda { |user| followed_by(user) }
 
-  # Adding javascript counter for number of input letters to micropost
-  max_chars = 140
-  # function definition to validate the length of characters
-  validates_length_of :content, :maximum => max_chars
-
   private
 
     # Return an SQL condition for users followed by the given user.
