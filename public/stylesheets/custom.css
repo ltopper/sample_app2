@@ -5,9 +5,9 @@ indicates that the rule styles a class called “container”*/
   width: 710px;
 }
 
-/*changes the background color of the body tag to baby blue*/
+/*changes the background  color of the body tag to baby blue*/
 body {
-  background: #cff;
+  background: #585858;
 }
 
 header {
@@ -85,7 +85,7 @@ nav ul li a {
 }
 
 nav ul li a:visited {
-  color: #09c;
+  color: #0174DF;
 }
 
 /* set how the nav text alters when the mouse hovers over it */
@@ -111,11 +111,35 @@ a.signup_button {
 /*	width of the button */
 	width: 190px;
 	color: #fff;
-	background: #006400;
+	background: #0080FF;
 	font-size: 150%;
 	font-weight: bold;
 /*	add padding to the button */
 	padding: 20px;
+}
+
+
+/* ------- Help Links --------- */
+
+a.help_links {
+/*	set the margins between the button and the right and left */
+	margin-left: auto;
+	margin-right: auto;
+	
+/*	something to do with keeping it in the center */
+	display: block;
+	
+/*	align the text inside of the button */
+	text-align: center;
+	
+/*	width of the button */
+	width: 300px;
+	color: #fff;
+	background: #084B8A;
+	font-size: 110%;
+	font-weight: bold;
+/*	add padding to the button */
+	padding: 10px;
 }
 
 
@@ -170,7 +194,7 @@ td.sidebar {
 
 /* profile class: gravatar class image style */
 .profile img.gravatar {
-	border: 1px solid #999;
+	border: 2px solid #999;
 	margin-bottom: -15px;
 }
 

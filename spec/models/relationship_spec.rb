@@ -6,6 +6,7 @@ describe Relationship do
     @followed = Factory(:user, :email => Factory.next(:email))
     
     @relationship = @follower.relationships.build(:followed_id => @followed.id)
+    
   end
   
   it "should create a new instance given valid attributes" do
@@ -45,5 +46,14 @@ describe Relationship do
       @relationship.followed_id = nil
       @relationship.should_not be_valid
     end
+  end
+  
+  describe "micropost sidebar tests" do
+
+    it "should display the correct number of followers and following"
+      get :home
+      response.should have_selector("title",
+                                     :content => "#{@base_title} | Home")
+    end  
   end
 end
