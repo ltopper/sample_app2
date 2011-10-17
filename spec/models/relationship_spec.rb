@@ -47,13 +47,4 @@ describe Relationship do
       @relationship.should_not be_valid
     end
   end
-  
-  describe "micropost sidebar tests" do
-
-    it "should display the correct number of followers and following"
-      get :home
-      response.should have_selector("title",
-                                     :content => "#{@base_title} | Home")
-    end  
-  end
 end

@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate(params[:session][:email],
                              params[:session][:password])
+    
     if user.nil?
       # Email/password combination is invalid, flash error and reset page
       # flash.now will not persist onto the next page

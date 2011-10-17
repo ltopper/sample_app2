@@ -23,6 +23,7 @@ module SessionsHelper
     #   ||= : the or equals command
     # @current_user ||= user_from_remember_token
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    
   end
   
   def current_user?(user)

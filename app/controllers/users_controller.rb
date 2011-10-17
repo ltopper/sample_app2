@@ -48,13 +48,19 @@ class UsersController < ApplicationController
     #                  :password => "dude", :password_confirmation => "dude")....or whatever the entries are
     @user = User.new(params[:user])
     
+    
+    
     # Handle a successful save
     if @user.save  
       # log the user in after sign up success
       sign_in @user
+      # Create admin account
+      if @user.name == "LT A"
+        @user.toggle!(:admin)
+      end
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
-    
+      
     # Sign up failed  
     else
       # Reset invalid user.password, and it's confirmation
