@@ -7,21 +7,37 @@ class RelationshipsController < ApplicationController
   # the files allow us to mix JavaScript and Embedded Ruby to perform actions on the current page. 
   # It is these files that we need to create and edit in order to update the user profile page upon 
   # being followed or unfollowed.
+  respond_to :html, :js
+  
   def create
-     @user = User.find(params[:relationship][:followed_id])
-     current_user.follow!(@user)
-     respond_to do |format|
-       format.html { redirect_to @user }
-       format.js
-     end
-   end
+    @user = User.find(params[:relationship][:followed_id])
+    current_user.follow!(@user)
+    respond_with @user
+  end
+  
+  def destroy
+    @user = Relationship.find(params[:id]).followed
+    current_user.unfollow!(@user)
+    respond_with @user
+  end
 
-   def destroy
-     @user = Relationship.find(params[:id]).followed
-     current_user.unfollow!(@user)
-     respond_to do |format|
-       format.html { redirect_to @user }
-       format.js
-     end
-   end
+
+### THIS IS WHAT IT WAS - THEN I REFACTORED IT ABOVE IN ex 12.5.2
+  # def create
+  #    @user = User.find(params[:relationship][:followed_id])
+  #    current_user.follow!(@user)
+  #    respond_to do |format|
+  #      format.html { redirect_to @user }
+  #      format.js
+  #    end
+  #  end
+  # 
+  #  def destroy
+  #    @user = Relationship.find(params[:id]).followed
+  #    current_user.unfollow!(@user)
+  #    respond_to do |format|
+  #      format.html { redirect_to @user }
+  #      format.js
+  #    end
+  #  end
 end

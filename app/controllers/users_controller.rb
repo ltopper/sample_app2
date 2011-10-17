@@ -55,7 +55,7 @@ class UsersController < ApplicationController
       # log the user in after sign up success
       sign_in @user
       # Create admin account
-      if @user.name == "LT A"
+      if @user.name == "Louis Topper"
         @user.toggle!(:admin)
       end
       flash[:success] = "Welcome to the Sample App!"
