@@ -3,16 +3,16 @@ module MicropostsHelper
 # Wrap text function to not break our layout when typing in the microposts
 # text box. The raw method prevents Rails from escaping the resulting HTML,
 # The sanitize method is needed to prevent cross-site scripting
-	def wrap(content)
-	  sanitize(raw(content.split.map{ |s| wrap_long_string(s) }.join(' ')))
+  def wrap(content)
+    sanitize(raw(content.split.map{ |s| wrap_long_string(s) }.join(' ')))
   end
-  
+
   private
-  
+
     def wrap_long_string(text, max_width = 30)
       zero_width_space = "&#8203;"
-      regrex = /.{1,#{max_width}}/
-      (text.length < max_width) ? text :
+      regex = /.{1,#{max_width}}/
+      (text.length < max_width) ? text : 
                                   text.scan(regex).join(zero_width_space)
     end
 end
